@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 
 
 function App() {
 
-  let Num = "1234567890"
+  let Num = "1234567890101112131415161718"
   let Char = " !@#$%^&*()_+-=[]{}|;:'\"<>,.?~"
   let Upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  let Lower = "abcdefghigklmqrstuvwxyz"
 
   const [length, setLenght] = useState(8)
 
@@ -17,7 +18,7 @@ function App() {
 
   let createPassword = () => {
 
-    let intialPassword = `abcdefghijkqrstuvwxyz`
+    let intialPassword = `${Lower}`
     let finalPassword = `${Upper.charAt(Math.floor(Math.random() * Upper.length))}`
 
     if (number || character || intialPassword) {
@@ -38,6 +39,12 @@ function App() {
     setPassword(finalPassword)
   }
 
+  useEffect(() => {
+   createPassword()
+
+  }, [])
+
+
   let copy = () => {
     navigator.clipboard.writeText(password)
     alert("Copied")
@@ -55,7 +62,7 @@ function App() {
       <div className='flex items-center gap-3   mt-4'>
 
         {/* input range and length */}
-        <input className='cursor-pointer' min={8} max={100} value={length} onChange={(e) => setLenght(e.target.value)} type="range" name="" id="" />
+        <input className='cursor-pointer' min={8} max={40} value={length} onChange={(e) => setLenght(e.target.value)} type="range" name="" id="" />
         <h3 className='text-orange-500 '>Length: {length}</h3>
 
         {/* Number check box  */}
